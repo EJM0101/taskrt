@@ -1,6 +1,6 @@
-
 from flask import Flask, render_template, request
 from utils.scheduler import simulate
+import os
 
 app = Flask(__name__)
 
@@ -25,3 +25,7 @@ def run_simulation():
     overload = utilization > 1.0
 
     return render_template('result.html', tasks=tasks, result=result, utilization=utilization, overload=overload, algo=algo)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Utilisation du port fourni par Render
+    app.run(host="0.0.0.0", port=port)  # Démarrage du serveur sur 0.0.0.0 et port dynamique
