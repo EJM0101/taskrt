@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,28 +6,64 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+
 <div class="container py-5">
-    <h1 class="mb-4 text-center">🕒 TaskRT - Ordonnancement Temps Réel</h1>
-    <form method="POST" action="/simulate">
+    <h1 class="mb-4 text-center">🕒 TaskRT - Simulateur d'Ordonnancement Temps Réel</h1>
+
+    <div class="mb-5 p-4 bg-white rounded shadow">
+        <h3>🎯 Objectif pédagogique</h3>
+        <p>Ce simulateur permet de comprendre les algorithmes d'ordonnancement **Temps Réel** comme EDF (Earliest Deadline First) et RM (Rate Monotonic).</p>
+
+        <h4>📖 Explications des paramètres :</h4>
+        <ul>
+            <li><strong>Nom tâche :</strong> Nom symbolique de la tâche (T1, T2...)</li>
+            <li><strong>Exécution (C) :</strong> Temps nécessaire pour exécuter la tâche (en ms, secondes...)</li>
+            <li><strong>Période (P) :</strong> Intervalle de répétition de la tâche (son cycle de récurrence)</li>
+            <li><strong>Deadline (D) :</strong> Délai maximal avant lequel la tâche doit être terminée (souvent égal à la période si non précisé autrement)</li>
+        </ul>
+
+        <h4>⚙️ Fonctionnement :</h4>
+        <p>Vous entrez les tâches périodiques à simuler, sélectionnez l’algorithme, et lancez la simulation. L’outil affichera le plan d’ordonnancement simulé et détectera si des tâches ratent leur deadline.</p>
+
+        <h4>🔎 Exemple simple :</h4>
+        <ul>
+            <li>Tâche 1 : Nom = T1, Exécution = 1, Période = 4, Deadline = 4</li>
+            <li>Tâche 2 : Nom = T2, Exécution = 2, Période = 5, Deadline = 5</li>
+        </ul>
+        <p>Avec EDF, la tâche avec la deadline la plus proche est toujours prioritaire à chaque instant.</p>
+    </div>
+
+    <form method="POST" action="/simulate" class="p-4 bg-white rounded shadow">
+        <h3 class="mb-4">📝 Ajouter les tâches</h3>
+
         <div id="task-list">
             <div class="row mb-3">
-                <div class="col"><input name="name" placeholder="Nom tâche" class="form-control" required></div>
-                <div class="col"><input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required></div>
-                <div class="col"><input name="period" placeholder="Période" type="number" min="1" class="form-control" required></div>
-                <div class="col"><input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required></div>
+                <div class="col">
+                    <input name="name" placeholder="Nom tâche" class="form-control" required>
+                </div>
+                <div class="col">
+                    <input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required>
+                </div>
+                <div class="col">
+                    <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
+                </div>
+                <div class="col">
+                    <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required>
+                </div>
             </div>
         </div>
+
         <button type="button" class="btn btn-secondary mb-3" onclick="addTask()">+ Ajouter une tâche</button>
 
         <div class="mb-3">
-            <label for="algorithm">Algorithme :</label>
+            <label for="algorithm" class="form-label"><strong>Choisissez l'algorithme d'ordonnancement :</strong></label>
             <select name="algorithm" class="form-select" required>
                 <option value="EDF">Earliest Deadline First (EDF)</option>
                 <option value="RM">Rate Monotonic (RM)</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Lancer la simulation</button>
+        <button type="submit" class="btn btn-primary">🚀 Lancer la simulation</button>
     </form>
 </div>
 
@@ -37,13 +72,22 @@ function addTask() {
   const div = document.createElement('div');
   div.className = "row mb-3";
   div.innerHTML = `
-    <div class="col"><input name="name" placeholder="Nom tâche" class="form-control" required></div>
-    <div class="col"><input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required></div>
-    <div class="col"><input name="period" placeholder="Période" type="number" min="1" class="form-control" required></div>
-    <div class="col"><input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required></div>
+    <div class="col">
+        <input name="name" placeholder="Nom tâche" class="form-control" required>
+    </div>
+    <div class="col">
+        <input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required>
+    </div>
+    <div class="col">
+        <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
+    </div>
+    <div class="col">
+        <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required>
+    </div>
   `;
   document.getElementById("task-list").appendChild(div);
 }
 </script>
+
 </body>
 </html>
