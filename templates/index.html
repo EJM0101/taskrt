@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskRT - Simulateur Temps Réel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h1 class="mb-4 text-center">🕒 TaskRT - Ordonnancement Temps Réel</h1>
+    <form method="POST" action="/simulate">
+        <div id="task-list">
+            <div class="row mb-3">
+                <div class="col"><input name="name" placeholder="Nom tâche" class="form-control" required></div>
+                <div class="col"><input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required></div>
+                <div class="col"><input name="period" placeholder="Période" type="number" min="1" class="form-control" required></div>
+                <div class="col"><input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required></div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" onclick="addTask()">+ Ajouter une tâche</button>
+
+        <div class="mb-3">
+            <label for="algorithm">Algorithme :</label>
+            <select name="algorithm" class="form-select" required>
+                <option value="EDF">Earliest Deadline First (EDF)</option>
+                <option value="RM">Rate Monotonic (RM)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lancer la simulation</button>
+    </form>
+</div>
+
+<script>
+function addTask() {
+  const div = document.createElement('div');
+  div.className = "row mb-3";
+  div.innerHTML = `
+    <div class="col"><input name="name" placeholder="Nom tâche" class="form-control" required></div>
+    <div class="col"><input name="execution" placeholder="Exécution" type="number" min="1" class="form-control" required></div>
+    <div class="col"><input name="period" placeholder="Période" type="number" min="1" class="form-control" required></div>
+    <div class="col"><input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required></div>
+  `;
+  document.getElementById("task-list").appendChild(div);
+}
+</script>
+</body>
+</html>
