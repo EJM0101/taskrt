@@ -3,9 +3,36 @@
 **TaskRT** est une application web pédagogique permettant de **simuler et visualiser les algorithmes d’ordonnancement temps réel** tels que :
 
 - EDF (Earliest Deadline First)
+
+Priorité dynamique : à chaque instant, on sélectionne la tâche dont la deadline absolue est la plus proche.
+
+Très efficace lorsque la charge CPU totale ≤ 100%.
+
+C’est optimal sur mono-processeur sans préemption coûteuse.
+
 - RM (Rate Monotonic Scheduling)
+
+Priorité statique : la tâche ayant la période la plus courte a la plus haute priorité.
+
+Simple mais moins flexible que EDF.
+
+Peut devenir impossible à planifier quand les tâches ont des périodes très différentes.
+
 - DM (Deadline Monotonic Scheduling)
+
+Variante de RM : priorité statique basée sur les deadlines (plus la deadline est courte, plus la priorité est haute).
+
+Si deadlines ≈ périodes → DM devient équivalent à RM.
+
+Peut être plus performant que RM quand les deadlines sont < périodes.
+
 - FIFO (First In First Out)
+
+Très simple : on exécute toujours la tâche arrivée en premier.
+
+Pas du tout optimal pour des systèmes critiques.
+
+Peut provoquer des violations de deadline même si le système est théoriquement faisable.
 
 Le but est d’aider les étudiants, enseignants, ingénieurs et chercheurs à comprendre le comportement des ordonnanceurs temps réel à travers des simulations interactives et des diagrammes de Gantt dynamiques.
 
