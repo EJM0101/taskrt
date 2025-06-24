@@ -1,3 +1,6 @@
+from math import gcd
+from functools import reduce
+
 def simulate(tasks, algorithm):
     hyperperiod = lcm([t['period'] for t in tasks])
     schedule = []
@@ -11,13 +14,13 @@ def simulate(tasks, algorithm):
 
         if eligible:
             if algorithm == 'EDF':
-                eligible.sort(key=lambda t: next_release(time, t) + t['deadline'])
+                eligible.sort(key=lambda t: ((time // t['period'] + 1) * t['period']))
             elif algorithm == 'RM':
                 eligible.sort(key=lambda t: t['period'])
             elif algorithm == 'DM':
                 eligible.sort(key=lambda t: t['deadline'])
             elif algorithm == 'FIFO':
-                pass  # garder l'ordre d'arrivée
+                pass  # ordre d'arrivée
             task = eligible[0]
             schedule.append({'time': time, 'task': task['name']})
         else:
@@ -25,13 +28,5 @@ def simulate(tasks, algorithm):
 
     return schedule, utilization
 
-def next_release(time, task):
-    # Calcul de la prochaine release time de cette tâche
-    return ((time // task['period']) + 1) * task['period']
-
 def lcm(numbers):
-    from math import gcd
-    from functools import reduce
-    def lcm_pair(a, b):
-        return a * b // gcd(a, b)
-    return reduce(lcm_pair, numbers)
+    return reduce(lambda a, b: a * b // gcd(a, b), numbers)
