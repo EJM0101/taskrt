@@ -10,26 +10,7 @@
 <div class="container py-5">
     <h1 class="mb-4 text-center">🕒 TaskRT - Simulateur d'Ordonnancement Temps Réel</h1>
 
-    <div class="mb-5 p-4 bg-white rounded shadow">
-        <h3>🎯 Objectif pédagogique</h3>
-        <p>Ce simulateur permet de comprendre plusieurs algorithmes d'ordonnancement **Temps Réel** :</p>
-        <ul>
-            <li><strong>EDF</strong> (Earliest Deadline First)</li>
-            <li><strong>RM</strong> (Rate Monotonic)</li>
-            <li><strong>DM</strong> (Deadline Monotonic)</li>
-            <li><strong>FIFO</strong> (First In First Out)</li>
-        </ul>
-
-        <h4>📖 Explications des paramètres :</h4>
-        <ul>
-            <li><strong>Nom tâche :</strong> Nom symbolique de la tâche (T1, T2...)</li>
-            <li><strong>Exécution (C) :</strong> Temps nécessaire pour exécuter la tâche (en ms, secondes...)</li>
-            <li><strong>Période (P) :</strong> Intervalle de répétition de la tâche</li>
-            <li><strong>Deadline (D) :</strong> Délai maximal avant lequel la tâche doit être terminée</li>
-        </ul>
-    </div>
-
-    <form method="POST" action="/simulate" class="p-4 bg-white rounded shadow">
+    <form method="POST" class="p-4 bg-white rounded shadow">
         <h3 class="mb-4">📝 Ajouter les tâches</h3>
 
         <div id="task-list">
@@ -44,7 +25,7 @@
                     <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
                 </div>
                 <div class="col">
-                    <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required>
+                    <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control">
                 </div>
             </div>
         </div>
@@ -52,7 +33,7 @@
         <button type="button" class="btn btn-secondary mb-3" onclick="addTask()">+ Ajouter une tâche</button>
 
         <div class="mb-3">
-            <label for="algorithm" class="form-label"><strong>Choisissez l'algorithme :</strong></label>
+            <label class="form-label"><strong>Choisissez l'algorithme :</strong></label>
             <select name="algorithm" class="form-select" required>
                 <option value="EDF">Earliest Deadline First (EDF)</option>
                 <option value="RM">Rate Monotonic (RM)</option>
@@ -80,7 +61,7 @@ function addTask() {
         <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
     </div>
     <div class="col">
-        <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control" required>
+        <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control">
     </div>
   `;
   document.getElementById("task-list").appendChild(div);
