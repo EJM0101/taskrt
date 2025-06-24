@@ -10,6 +10,34 @@
 <div class="container py-5">
     <h1 class="mb-4 text-center">🕒 TaskRT - Simulateur d'Ordonnancement Temps Réel</h1>
 
+    <div class="mb-5 p-4 bg-white rounded shadow">
+        <h3>🎯 Objectif pédagogique</h3>
+        <p>Ce simulateur vous permet de comprendre les comportements de différents algorithmes d'ordonnancement **Temps Réel**, en observant visuellement la planification des tâches périodiques et leur exécution.</p>
+
+        <h4>📖 Explication des champs :</h4>
+        <ul>
+            <li><strong>Nom tâche :</strong> identifiant symbolique de la tâche (ex. T1, T2...)</li>
+            <li><strong>Exécution (C) :</strong> temps d’exécution nécessaire de la tâche (en millisecondes ou unités de temps)</li>
+            <li><strong>Période (P) :</strong> fréquence de réapparition de la tâche (ex : toutes les 4 ms, toutes les 10 ms...)</li>
+            <li><strong>Deadline (D) :</strong> instant maximal avant lequel l’exécution de la tâche doit être terminée (souvent égal à la période)</li>
+        </ul>
+
+        <h4>⚙️ Présentation des algorithmes :</h4>
+        <ul>
+            <li><strong>EDF (Earliest Deadline First) :</strong> Priorité dynamique. La tâche ayant la deadline la plus proche est exécutée en premier à chaque instant. Algorithme optimal en mono-processeur si la charge totale est ≤ 100%.</li>
+            <li><strong>RM (Rate Monotonic) :</strong> Priorité fixe basée sur la période : les tâches avec les périodes les plus courtes ont les plus hautes priorités. Simple et souvent utilisé en systèmes embarqués.</li>
+            <li><strong>DM (Deadline Monotonic) :</strong> Variante de RM : priorités fixes selon la valeur des deadlines (plus la deadline est courte, plus la priorité est haute).</li>
+            <li><strong>FIFO (First In First Out) :</strong> Les tâches sont exécutées dans l’ordre où elles arrivent sans aucune réorganisation de priorité. Très simple mais non optimal pour les systèmes critiques.</li>
+        </ul>
+
+        <h4>🔎 Exemple simple :</h4>
+        <ul>
+            <li>Tâche 1 : Nom = T1, Exécution = 1, Période = 4, Deadline = 4</li>
+            <li>Tâche 2 : Nom = T2, Exécution = 2, Période = 5, Deadline = 5</li>
+        </ul>
+        <p>Avec EDF, la tâche dont la deadline est la plus proche sera toujours exécutée en premier.</p>
+    </div>
+
     <form method="POST" class="p-4 bg-white rounded shadow">
         <h3 class="mb-4">📝 Ajouter les tâches</h3>
 
@@ -25,7 +53,7 @@
                     <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
                 </div>
                 <div class="col">
-                    <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control">
+                    <input name="deadline" placeholder="Deadline (optionnel)" type="number" min="1" class="form-control">
                 </div>
             </div>
         </div>
@@ -61,7 +89,7 @@ function addTask() {
         <input name="period" placeholder="Période" type="number" min="1" class="form-control" required>
     </div>
     <div class="col">
-        <input name="deadline" placeholder="Deadline" type="number" min="1" class="form-control">
+        <input name="deadline" placeholder="Deadline (optionnel)" type="number" min="1" class="form-control">
     </div>
   `;
   document.getElementById("task-list").appendChild(div);
