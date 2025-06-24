@@ -12,25 +12,21 @@
 
     <div class="mb-5 p-4 bg-white rounded shadow">
         <h3>🎯 Objectif pédagogique</h3>
-        <p>Ce simulateur permet de comprendre les algorithmes d'ordonnancement **Temps Réel** comme EDF (Earliest Deadline First) et RM (Rate Monotonic).</p>
+        <p>Ce simulateur permet de comprendre plusieurs algorithmes d'ordonnancement **Temps Réel** :</p>
+        <ul>
+            <li><strong>EDF</strong> (Earliest Deadline First)</li>
+            <li><strong>RM</strong> (Rate Monotonic)</li>
+            <li><strong>DM</strong> (Deadline Monotonic)</li>
+            <li><strong>FIFO</strong> (First In First Out)</li>
+        </ul>
 
         <h4>📖 Explications des paramètres :</h4>
         <ul>
             <li><strong>Nom tâche :</strong> Nom symbolique de la tâche (T1, T2...)</li>
             <li><strong>Exécution (C) :</strong> Temps nécessaire pour exécuter la tâche (en ms, secondes...)</li>
-            <li><strong>Période (P) :</strong> Intervalle de répétition de la tâche (son cycle de récurrence)</li>
-            <li><strong>Deadline (D) :</strong> Délai maximal avant lequel la tâche doit être terminée (souvent égal à la période si non précisé autrement)</li>
+            <li><strong>Période (P) :</strong> Intervalle de répétition de la tâche</li>
+            <li><strong>Deadline (D) :</strong> Délai maximal avant lequel la tâche doit être terminée</li>
         </ul>
-
-        <h4>⚙️ Fonctionnement :</h4>
-        <p>Vous entrez les tâches périodiques à simuler, sélectionnez l’algorithme, et lancez la simulation. L’outil affichera le plan d’ordonnancement simulé et détectera si des tâches ratent leur deadline.</p>
-
-        <h4>🔎 Exemple simple :</h4>
-        <ul>
-            <li>Tâche 1 : Nom = T1, Exécution = 1, Période = 4, Deadline = 4</li>
-            <li>Tâche 2 : Nom = T2, Exécution = 2, Période = 5, Deadline = 5</li>
-        </ul>
-        <p>Avec EDF, la tâche avec la deadline la plus proche est toujours prioritaire à chaque instant.</p>
     </div>
 
     <form method="POST" action="/simulate" class="p-4 bg-white rounded shadow">
@@ -56,10 +52,12 @@
         <button type="button" class="btn btn-secondary mb-3" onclick="addTask()">+ Ajouter une tâche</button>
 
         <div class="mb-3">
-            <label for="algorithm" class="form-label"><strong>Choisissez l'algorithme d'ordonnancement :</strong></label>
+            <label for="algorithm" class="form-label"><strong>Choisissez l'algorithme :</strong></label>
             <select name="algorithm" class="form-select" required>
                 <option value="EDF">Earliest Deadline First (EDF)</option>
                 <option value="RM">Rate Monotonic (RM)</option>
+                <option value="DM">Deadline Monotonic (DM)</option>
+                <option value="FIFO">First In First Out (FIFO)</option>
             </select>
         </div>
 
